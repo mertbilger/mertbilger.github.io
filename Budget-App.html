@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bütce Takip Uygulaması Anlatımı</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div class="container border border-primary rounded mt-2">
+        <h1>Bütçe Takip ve Planlama Uygulaması</h1><br>
+        <p>
+        Bu projem aylık bütçe takibinizi yapmanızı kolaylaştıracak bir uygulamadır.<br><br>
+        Projeye 
+            <a href="https://github.com/mertbilger/React-Budget-App">https://github.com/mertbilger/React-Budget-App</a>
+            
+        adresinden ulaşabilirsiniz.<br /><br>
+        <h4><strong>Ayrıca Uygulamaya </strong><a href="https://react-budget-app-gamma.vercel.app/">https://react-budget-app-gamma.vercel.app/</a><strong> adresinden ulaşabilirsiniz.</strong></h4><br><br>
+        Aşağıda bu projeyi oluştururken izlediğim adımları açıklayacağım ve kritik detaylara değineceğim.
+        </p>
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+        <h2>React Projesi Oluşturmak</h2>
+        <p>
+           <br />Öncelikle aşşağıdaki adımları izleyerek bir React projesi oluşturalım.(Ben Visual Studio Code programını kullandığım için terminal ekranından oluşturdum. )
+           <br> <br><kbd>npx create-react-app my-app</kbd><br>
+        </p>
+            Daha sonra yine terminal ekranından aşşağıdaki komutu kullanarak projemize giriyoruz.                     
+            <br><br> <kbd>cd my-app</kbd><br /><br>          
+                <p>Ve aşşağıdaki komutla uygulama sayfamıza giriyoruz</p>
+                <kbd>npm start</kbd><br />
+                <br><img src="İmages/yeni react.png" class="img-fluid" alt="react"/>
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+        <h2>İlk Bakış</h2>
+        <p>
+           <br />Bize lazım olanlar kalanlar olacaktır geri kalan dosyaları silin ve başka dosyalarda içe aktarılmış olduğu için (import) onların da aktarmalarını silin yoksa hata alırsınız.
+        </p>
+        <div class="col-lg-8">
+                <br><img src="İmages/kalanlar.png" class="img-fluid" alt="react"/>
+        </div>        
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+        <h3>Kullanacağımız Dosyaları Oluşturmak </h3>
+        <p>Src klasörü altına components adlı dosyamızı oluşturalım, burda bizim her bir işlem için oluşturacağımız dosyaları barındırıyoruz.
+            Bunun sebebi App.js dosyamızın içinde karışıklık olmaması ve daha düzenli,temiz kod görünümü yaratmak için.  
+        </p>
+            <div class="col-lg-8">
+                <img src="İmages/Dosya Yapısı.png" class="img-fluid" alt=""/>
+            </div>
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+        <h3>Genel Site Görünümünün Hazırlanması </h3>
+        <p>Bütçe alanını butcebutton.js dosyasının içine oluşturalım</p>
+        <pre>
+            <code class="fw-bold">
+                &lt;div class='alert alert-secondary p-3 d-flex align-items-center justify-content-between'&gt;&lt;/div&gt;
+            </code>
+        </pre>
+        <p>Şimdi de harcanan miktar alanını oluşturalım, harcama.js dosyasının içine oluşturuyoruz.</p>    
+        <pre>
+            <code class="fw-bold">
+                &lt;div className="alert alert-danger">
+                &lt;span&gt;
+                        Harcanan Tutar : TL
+                &lt;/span&gt;
+                </div>
+            </code>
+        </pre>
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+            <p>Şimdi de harcanan miktar alanını oluşturalım burda bulunan tanımlanmamış değerleri daha sonra tanımlayacağız.
+                Mantığı ise bütçe toplam harcanandan küçük ise yeşil, toplam harcanan büyük ise kırmızı görünüyor olması.kalan.js dosyasının içine oluşturuyoruz.
+                Edit butonunu daha sonra oluşturacağız.
+             </p>
+            <div class="col-lg-7">
+                <pre>  
+                    <code class="fw-bold">
+                        const alertType = totalExpenses > butce ? 'alert-danger' : 'alert-success';
+                        const Ktutar = butce - totalExpenses;
+                        &lt;div className={`alert ${alertType}`}>
+                        &lt;span&gt;
+                                Kalan Bakiye : TL
+                        &lt;/span&gt;
+                       
+                    </code>
+                </pre>
+            </div>    
+
+            <div class="row-cols-lg-auto">
+                <img src="İmages/görünüm.png" class="img-fluid" alt="görünüm"/>
+            </div>
+            <p>Ayrıca App.js dosyasının içine h1 boyutunda Bütçe Planlayıcı başlığını attım.</p>
+        </div>
+    </div>
+
+    <div class="row border border-secondary rounded m-5">
+        <h3>AppContext 'in Oluşturulması ve App.js ' de Kullanılması</h3>
+        <div class="col-lg-8">
+            <img src="İmages/context.png" class="img-fluid" alt="context"/>
+        </div>
+        <div class="col-lg-4">
+         <p>Ana işlemlerimizin döneceği dosyamızı oluşturalım.Bunu context adında bir klasör 
+            oluşturup içene AppContext dosyasını oluşturabiliriz.Öncelikle bir context oluşturalım.Contexti 
+            dışa aktaracağımız için export const ile oluşturuyoruz.
+        </p>
+        <pre>  
+            <code class="fw-bold">
+                export const AppContext = createContext();
+            </code>
+        </pre>    
+        <p>Bütçe ve Harcamalar kısmını da oluşturalım.Eklediğimiz harcamalar bu diziye eklenecek ve bütçede bu alanda güncellenecek.</p>
+        </div>
+    </div>
+    <div class="row border border-secondary rounded m-5">
+        <div class="col-lg-8">
+            <img src="İmages/App.js conetxt.png" class="img-fluid" alt="appcont"/>
+        </div>
+        <div class="col-lg-4">
+         <p>İmport işlemlerimizide yapmayı unutmuyoruz.</p>
+        </div>
+    </div>
+
+    <div class="row border border-secondary rounded m-5">
+        <div class="col-lg-8">
+            <img src="İmages/form.png" class="img-fluid" alt="form"/>
+        </div>
+        <div class="col-lg-4">
+         <p>Şimdi gider ismi ve tutarını aldığımız formumuzu oluşturalım.
+            UseState kullanarak name ve tutar kısımlarını oluşturalım.Daha sonra girilen girişlerin değerlerini tanımlayan bölümü oluşturalım.Ayrıca uuidv4 kullanmamızın sebebi 
+            benzersiz id ler göndererek girilen değerlerin karışmamasını sağlamaktır.
+        </p>
+        <pre>  
+            <code class="fw-bold">
+                const onSubmit = (event) => {
+                    event.preventDefault();
+                    const masraf = {
+                        id: uuidv4(),
+                        name: name,
+                        tutar: parseInt(tutar),
+                    }
+                    dispatch({
+                        type: 'MASRAF_EKLE',
+                        payload: masraf,
+                    })
+                }
+            </code>
+        </pre> 
+        <p>Daha sonra AppContext 'de AppReducer kullanarak gelen değeri alıp harcamalar listesine ekleme işlemi yapıyoruz</p>
+        <pre>  
+            <code class="fw-bold">
+           const AppReducer = (state, action) => {
+            switch (action.type) {
+                case 'MASRAF_EKLE':
+                    return {
+                        ...state,
+                        harcamalar: [...state.harcamalar, action.payload],
+                    }
+                }
+            }
+            
+            </code>
+        </pre> 
+
+        </div>
+    </div>
+
+    <div class="container border border-primary rounded mt-2">
+        <h3>Bütçe Değerinin Değiştirilmesi ve Uygulanması</h3>
+        <p>Daha önce bahsettiğim butce miktarımızı değiştireceğimiz butonu oluşturmak için butcebutton.js dosyamızı kullanıyoruz.
+         </p>
+         <div class="col-lg-7">
+            <pre>  
+            <code class="fw-bold">
+            import React from 'react';
+
+              const ViewBudget = (props) => {
+              return (
+              &lt;&gt;
+              &lt;span&gt;Bütçe: {props.butce} TL&lt;/span&gt;
+              &lt;button type='button' class='btn btn-primary' onClick={props.handleEditClick}&gt
+                    Değiştir
+              &lt/button&gt
+                &lt/&gt
+               );
+             };
+
+                export default ViewBudget;
+
+            </code>
+        </pre> 
+        Burda girdiğimiz bütçe değerini kullanıcıdan istiyoruz ve props sayesinde
+        AppContext 'te kullanabiliyoruz. (Bütçe değerini güncelleme işlemi)
+            <div class="container border border-primary rounded mt-2">
+                <div class="col-lg-7"> 
+                    <pre>  
+                        <code class="fw-bold">
+                           import React, { useState } from 'react';
+        
+                              const EditBudget = (props) => {
+                              const [value, setValue] = useState(props.butce);
+                              return (
+                              &lt&gt
+                              &ltinput
+                              required='required'
+                              type='number'
+                              class='form-control mr-3'
+                              id='name'
+                              value={value}
+                              onChange={(event) => setValue(event.target.value)}
+                              /&gt
+                              &ltbutton
+                              type='button'
+                              class='btn btn-primary'
+                              onClick={() => props.handleSaveClick(value)}
+                              &gt;
+                              Save
+                              &lt/button&gt
+                              &lt/&gt
+                            );
+                            ;
+        
+                           export default EditBudget;
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="container border border-primary rounded mt-2">
+            <div class="row border border-secondary rounded m-1">
+                <div class="col-lg-8">
+                    <img src="İmages/butcecontext.png" class="img-fluid" alt="setbutce"/>
+                </div>
+                <div class="col-lg-4">
+                   Daha sonra useState kullanarak değerlerimizi tanımlıyoruz.useState false değeri almasının sebebi biz değiştirdiğimizde uygulanacak olması.<strong>SET_BUDGET</strong>
+                   değerini AppContexte tanımlayacağız.Eğer değişiklik yapılmış ise EditBudget ve ViewBudget alanları güncellenicek.
+                    <br><br>
+                    <pre>  
+                        <code class="fw-bold">
+                       const AppReducer = (state, action) => {
+                        switch (action.type) {
+                            case 'SET_BUDGET':
+                            return {
+                                ...state,
+                                butce: action.payload,
+                                }
+                            }
+                        }
+                        
+                        </code>
+                    </pre> 
+                    AppContext dosyamıza da ekliyoruz.
+                </div>
+            </div>
+        </div>
+
+        <div class="container border border-primary rounded mt-2">
+            <h3>Harcamaları Dizide Tanımlama</h3>
+            <div class="row border border-secondary rounded m-1">
+                <div class="col-lg-8">
+                    <img src="İmages/harcama gönder.png" class="img-fluid" alt="harcamalagönder"/>
+                </div>
+                <div class="col-lg-4">
+                   Burası harcamalar dizisi içinde gezerek formda girmiş olduğumuz değerleri tanımlayan alandır.
+                </div>
+            </div>
+        </div>
+
+
+            <div class="container border border-primary rounded mt-2">
+                <h3>Harcama İşlemleri</h3>
+                <div class="row border border-secondary rounded m-1">
+                    <div class="col-lg-8">
+                        <img src="İmages/harcamalar.png" class="img-fluid" alt="harcamalar"/>
+                    </div>
+                    <div class="col-lg-4">
+                       Burada girmiş olduğumuz gider tutarlarını toplayıp Harcanan Tutar kısmında görünmesini sağlayacağız.Kullanmış olduğum reducer harcamalar dizisindeki değerleri
+                       tek değere indirgeyerek toplamamızı sağlayacaktır.
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border border-primary rounded mt-2">
+                <h3>Kalan.js Dosyasının Son Hali</h3>
+                <h6>Umarım Netleşmiştir :))</h6>
+                <div class="row border border-secondary rounded m-1">
+                    <div class="col-lg-8">
+                        <img src="İmages/harcamalar.png" class="img-fluid" alt="harcamalar"/>
+                    </div>
+                    <div class="col-lg-4">
+                       Son anlatmış olduğum harcamalar kısmındaki toplam harcanan değerlerin toplamını kalan.js dosyasına ekliyoruz.
+                        <br><br>
+                       <pre>  
+                        <code class="fw-bold">
+                        const { harcamalar, butce } = useContext(AppContext);
+                        const totalExpenses = harcamalar.reduce((total, item) => {
+                        return (total = total + item.tutar);
+                         }, 0)
+                        </code>
+                    </pre>
+                    <h6>Lütfen İmportları Unutmayın.</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border border-primary rounded mt-2">
+                <h3>Harcama Silme</h3>
+                <div class="row border border-secondary rounded m-1">
+                    <div class="col-lg-8">
+                        <img src="İmages/harcamasil.png" class="img-fluid" alt="harcamalar"/>
+                    </div>
+                    <div class="col-lg-4">
+                       Girilen harcama ekranında bulunan çarpı işaretine (TiDelete) tıklayınca Deleteitem fonksiyonumuz çalışacak.<strong>HARCAMA_SİL</strong>fonksiyonu ise girilen 
+                       değerin id sini AppContexte göderilip orda silme işlemine tabi tutulacak.
+                        <br><br>
+                       <pre>  
+                        case 'HARCAMA_SİL':
+                        return {
+                            ...state,
+                            harcamalar: state.harcamalar.filter(
+                                (harcamalar) => harcamalar.id !== action.payload
+                            ),
+                         }
+                       }
+                     } 
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container border border-primary rounded mt-2">
+                <h3>Grafiklerin Hazırlanması </h3>
+                <p>Öncelikle grafikleri <a href="https://recharts.org/en-US/examples">https://recharts.org/en-US/examples</a> sitesinden alabilirsiniz ama benim yapmış olduğum değişiklikler için Github sayfamda ki uygulama projesinden ulaşabilirsiniz.</p>
+                <br><br>
+                <p>Burada aşşağıdaki daha önce tanımlamış olduğumuz değerleri tekrar tanımlıyoruz.Kritik nokta <strong>NewData</strong> adlı bir değişken oluşturdum
+                ve gelen data değerini güncelleyip Toplam Harcanıda grafiğe ekledim.Ayrıca PieChart divinde datayı güncelledim.
+                </p>
+                <pre>
+                    <code class="fw-bold">
+                        
+                        const { butce, harcamalar } = useContext(AppContext);
+                        const totalExpenses = harcamalar.reduce((total, item) => {
+                        return (total += item.tutar)
+                        }, 0)
+                        const Ktutar = butce - totalExpenses;
+                        const data = [
+                        { name: "Bütçe", value: Ktutar },
+                        ];
+                        const newData = [...data, { name: '', value: totalExpenses }]
+                    </code>
+                </pre>
+                <p>Şimdi de diğer grafiğimize gelelim.Burada da değerleri tanımlıyoruz ve 
+                    benzer işlemleri yapıyoruz ve LineChart divinden datayı güncelliyoruz. Orjinal grafik üstünde değişiklikler yaptığım için Github sayfamda ki uygulama projesinden kullandığım şekline bakabilirsiniz.
+                
+                </p>    
+                <pre>
+                    <code class="fw-bold">
+                        const { butce, harcamalar } = useContext(AppContext);
+                        const totalExpenses = harcamalar.reduce((total, item) => {
+                            return (total += item.tutar)
+                        }, 0)
+                        const alertType = totalExpenses > butce ? 'red' : 'green';
+                        const newData = [...data, { name: 'Şu Ana Kadar', Harcanan: totalExpenses }]
+                    
+                        </div>
+                    </code>
+                </pre>
+            </div>
+    </body>
+</html>
